@@ -23,19 +23,11 @@ public partial class MainWindow
 
 	private global::Gtk.VBox vboxMain;
 
+	private global::Gtk.Label label2;
+
 	private global::Gtk.ScrolledWindow GtkScrolledWindow;
 
-	private global::Gtk.NodeView exercicesListView;
-
-	private global::Gtk.HBox hboxButtons;
-
-	private global::Gtk.HButtonBox hbuttonbox1;
-
-	private global::Gtk.Button newExerciceButton;
-
-	private global::Gtk.Button editExerciceButton;
-
-	private global::Gtk.Button openExercicesInExplorerButton;
+	private global::Gtk.TreeView treeviewImported;
 
 	protected virtual void Build()
 	{
@@ -76,84 +68,33 @@ public partial class MainWindow
 		this.vboxMain.Spacing = 6;
 		this.vboxMain.BorderWidth = ((uint)(20));
 		// Container child vboxMain.Gtk.Box+BoxChild
+		this.label2 = new global::Gtk.Label();
+		this.label2.Name = "label2";
+		this.label2.LabelProp = global::Mono.Unix.Catalog.GetString("En attente de la connexion d\'un microphone...");
+		this.vboxMain.Add(this.label2);
+		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vboxMain[this.label2]));
+		w2.Position = 0;
+		w2.Expand = false;
+		w2.Fill = false;
+		// Container child vboxMain.Gtk.Box+BoxChild
 		this.GtkScrolledWindow = new global::Gtk.ScrolledWindow();
 		this.GtkScrolledWindow.Name = "GtkScrolledWindow";
 		this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
 		// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
-		this.exercicesListView = new global::Gtk.NodeView();
-		this.exercicesListView.CanFocus = true;
-		this.exercicesListView.Name = "exercicesListView";
-		this.GtkScrolledWindow.Add(this.exercicesListView);
+		this.treeviewImported = new global::Gtk.TreeView();
+		this.treeviewImported.CanFocus = true;
+		this.treeviewImported.Name = "treeviewImported";
+		this.GtkScrolledWindow.Add(this.treeviewImported);
 		this.vboxMain.Add(this.GtkScrolledWindow);
-		global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vboxMain[this.GtkScrolledWindow]));
-		w3.Position = 0;
-		// Container child vboxMain.Gtk.Box+BoxChild
-		this.hboxButtons = new global::Gtk.HBox();
-		this.hboxButtons.Name = "hboxButtons";
-		this.hboxButtons.Spacing = 6;
-		// Container child hboxButtons.Gtk.Box+BoxChild
-		this.hbuttonbox1 = new global::Gtk.HButtonBox();
-		this.hbuttonbox1.Name = "hbuttonbox1";
-		this.hbuttonbox1.Spacing = 20;
-		this.hbuttonbox1.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(3));
-		// Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
-		this.newExerciceButton = new global::Gtk.Button();
-		this.newExerciceButton.CanFocus = true;
-		this.newExerciceButton.Name = "newExerciceButton";
-		this.newExerciceButton.UseUnderline = true;
-		this.newExerciceButton.Label = global::Mono.Unix.Catalog.GetString("Nouvel exercice");
-		global::Gtk.Image w4 = new global::Gtk.Image();
-		w4.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-add", global::Gtk.IconSize.Menu);
-		this.newExerciceButton.Image = w4;
-		this.hbuttonbox1.Add(this.newExerciceButton);
-		global::Gtk.ButtonBox.ButtonBoxChild w5 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox1[this.newExerciceButton]));
-		w5.Expand = false;
-		w5.Fill = false;
-		// Container child hbuttonbox1.Gtk.ButtonBox+ButtonBoxChild
-		this.editExerciceButton = new global::Gtk.Button();
-		this.editExerciceButton.Sensitive = false;
-		this.editExerciceButton.CanFocus = true;
-		this.editExerciceButton.Name = "editExerciceButton";
-		this.editExerciceButton.UseUnderline = true;
-		this.editExerciceButton.Label = global::Mono.Unix.Catalog.GetString("Reprendre cet exercice");
-		global::Gtk.Image w6 = new global::Gtk.Image();
-		w6.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-edit", global::Gtk.IconSize.Menu);
-		this.editExerciceButton.Image = w6;
-		this.hbuttonbox1.Add(this.editExerciceButton);
-		global::Gtk.ButtonBox.ButtonBoxChild w7 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.hbuttonbox1[this.editExerciceButton]));
-		w7.Position = 1;
-		w7.Expand = false;
-		w7.Fill = false;
-		this.hboxButtons.Add(this.hbuttonbox1);
-		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hboxButtons[this.hbuttonbox1]));
-		w8.Position = 0;
-		// Container child hboxButtons.Gtk.Box+BoxChild
-		this.openExercicesInExplorerButton = new global::Gtk.Button();
-		this.openExercicesInExplorerButton.CanFocus = true;
-		this.openExercicesInExplorerButton.Name = "openExercicesInExplorerButton";
-		this.openExercicesInExplorerButton.UseUnderline = true;
-		this.openExercicesInExplorerButton.Label = global::Mono.Unix.Catalog.GetString("Voir dans l\'explorateur");
-		global::Gtk.Image w9 = new global::Gtk.Image();
-		w9.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-directory", global::Gtk.IconSize.Menu);
-		this.openExercicesInExplorerButton.Image = w9;
-		this.hboxButtons.Add(this.openExercicesInExplorerButton);
-		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hboxButtons[this.openExercicesInExplorerButton]));
-		w10.PackType = ((global::Gtk.PackType)(1));
-		w10.Position = 1;
-		w10.Expand = false;
-		w10.Fill = false;
-		this.vboxMain.Add(this.hboxButtons);
-		global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vboxMain[this.hboxButtons]));
-		w11.Position = 1;
-		w11.Expand = false;
-		w11.Fill = false;
+		global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vboxMain[this.GtkScrolledWindow]));
+		w4.Position = 1;
 		this.Add(this.vboxMain);
 		if ((this.Child != null))
 		{
 			this.Child.ShowAll();
 		}
-		this.DefaultWidth = 570;
-		this.DefaultHeight = 435;
+		this.DefaultWidth = 632;
+		this.DefaultHeight = 321;
 		this.Show();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler(this.OnDeleteEvent);
 	}

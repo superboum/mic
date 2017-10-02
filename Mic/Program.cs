@@ -11,6 +11,10 @@ namespace Mic
 			Gtk.Settings.Default.SetLongProperty ("gtk-button-images", 1, "");
 			MainWindow win = new MainWindow();
 			win.Show();
+
+			ImportWindow iw = new ImportWindow();
+			iw.Show();
+
 			Application.Run();
 		}
 	}
