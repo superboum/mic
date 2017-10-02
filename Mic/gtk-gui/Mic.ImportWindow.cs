@@ -8,17 +8,17 @@ namespace Mic
 
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
 
-		private global::Gtk.NodeView nodeview2;
+		private global::Gtk.NodeView importView;
 
 		private global::Gtk.HBox hbox2;
 
-		private global::Gtk.Button button308;
+		private global::Gtk.Button clearMicButton;
 
-		private global::Gtk.Button button307;
+		private global::Gtk.Button buttonImport;
 
-		private global::Gtk.ComboBoxEntry comboboxentry1;
+		private global::Gtk.ComboBoxEntry comboChooseStudent;
 
-		private global::Gtk.ComboBoxEntry comboboxentry2;
+		private global::Gtk.ComboBoxEntry comboChooseExercice;
 
 		protected virtual void Build()
 		{
@@ -38,10 +38,10 @@ namespace Mic
 			this.GtkScrolledWindow.Name = "GtkScrolledWindow";
 			this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
 			// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
-			this.nodeview2 = new global::Gtk.NodeView();
-			this.nodeview2.CanFocus = true;
-			this.nodeview2.Name = "nodeview2";
-			this.GtkScrolledWindow.Add(this.nodeview2);
+			this.importView = new global::Gtk.NodeView();
+			this.importView.CanFocus = true;
+			this.importView.Name = "importView";
+			this.GtkScrolledWindow.Add(this.importView);
 			this.vbox4.Add(this.GtkScrolledWindow);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox4[this.GtkScrolledWindow]));
 			w2.Position = 0;
@@ -50,47 +50,47 @@ namespace Mic
 			this.hbox2.Name = "hbox2";
 			this.hbox2.Spacing = 6;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.button308 = new global::Gtk.Button();
-			this.button308.CanFocus = true;
-			this.button308.Name = "button308";
-			this.button308.UseUnderline = true;
-			this.button308.Label = global::Mono.Unix.Catalog.GetString("Vider le micro");
-			this.hbox2.Add(this.button308);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.button308]));
+			this.clearMicButton = new global::Gtk.Button();
+			this.clearMicButton.CanFocus = true;
+			this.clearMicButton.Name = "clearMicButton";
+			this.clearMicButton.UseUnderline = true;
+			this.clearMicButton.Label = global::Mono.Unix.Catalog.GetString("Vider le micro");
+			this.hbox2.Add(this.clearMicButton);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.clearMicButton]));
 			w3.Position = 0;
 			w3.Expand = false;
 			w3.Fill = false;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.button307 = new global::Gtk.Button();
-			this.button307.CanFocus = true;
-			this.button307.Name = "button307";
-			this.button307.UseUnderline = true;
-			this.button307.Label = global::Mono.Unix.Catalog.GetString("Importer");
-			this.hbox2.Add(this.button307);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.button307]));
+			this.buttonImport = new global::Gtk.Button();
+			this.buttonImport.CanFocus = true;
+			this.buttonImport.Name = "buttonImport";
+			this.buttonImport.UseUnderline = true;
+			this.buttonImport.Label = global::Mono.Unix.Catalog.GetString("Importer");
+			this.hbox2.Add(this.buttonImport);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.buttonImport]));
 			w4.PackType = ((global::Gtk.PackType)(1));
 			w4.Position = 1;
 			w4.Expand = false;
 			w4.Fill = false;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.comboboxentry1 = global::Gtk.ComboBoxEntry.NewText();
-			this.comboboxentry1.AppendText(global::Mono.Unix.Catalog.GetString("Nom de l\'élève"));
-			this.comboboxentry1.CanDefault = true;
-			this.comboboxentry1.Name = "comboboxentry1";
-			this.comboboxentry1.Active = 0;
-			this.hbox2.Add(this.comboboxentry1);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.comboboxentry1]));
+			this.comboChooseStudent = global::Gtk.ComboBoxEntry.NewText();
+			this.comboChooseStudent.AppendText(global::Mono.Unix.Catalog.GetString("Nom de l\'élève"));
+			this.comboChooseStudent.CanDefault = true;
+			this.comboChooseStudent.Name = "comboChooseStudent";
+			this.comboChooseStudent.Active = 0;
+			this.hbox2.Add(this.comboChooseStudent);
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.comboChooseStudent]));
 			w5.PackType = ((global::Gtk.PackType)(1));
 			w5.Position = 2;
 			w5.Expand = false;
 			w5.Fill = false;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.comboboxentry2 = global::Gtk.ComboBoxEntry.NewText();
-			this.comboboxentry2.AppendText(global::Mono.Unix.Catalog.GetString("Nom de l\'exercice"));
-			this.comboboxentry2.Name = "comboboxentry2";
-			this.comboboxentry2.Active = 0;
-			this.hbox2.Add(this.comboboxentry2);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.comboboxentry2]));
+			this.comboChooseExercice = global::Gtk.ComboBoxEntry.NewText();
+			this.comboChooseExercice.AppendText(global::Mono.Unix.Catalog.GetString("Nom de l\'exercice"));
+			this.comboChooseExercice.Name = "comboChooseExercice";
+			this.comboChooseExercice.Active = 0;
+			this.hbox2.Add(this.comboChooseExercice);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.comboChooseExercice]));
 			w6.PackType = ((global::Gtk.PackType)(1));
 			w6.Position = 3;
 			w6.Expand = false;
@@ -107,7 +107,7 @@ namespace Mic
 			}
 			this.DefaultWidth = 571;
 			this.DefaultHeight = 328;
-			this.comboboxentry1.HasDefault = true;
+			this.comboChooseStudent.HasDefault = true;
 			this.Show();
 		}
 	}
