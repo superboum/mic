@@ -31,15 +31,22 @@ namespace MicCore
 		protected void PopulateAudioFiles(DirectoryInfo di)
 		{
 			string[] extensions = { "*.mp3", "*.wav"}; // Is not case sensitive
-			extensions.ToList().ForEach(
-				(ext) => di.GetFiles(ext).ToList().ForEach(
-					(file) => AudioFiles.Add(file)
-				)
-			);
-			
-			di.GetDirectories().ToList().ForEach(
-				(dir) => PopulateAudioFiles(dir)
-			);
+			try
+			{
+				extensions.ToList().ForEach(
+					(ext) => di.GetFiles(ext).ToList().ForEach(
+						(file) => AudioFiles.Add(file)
+					)
+				);
+
+				di.GetDirectories().ToList().ForEach(
+					(dir) => PopulateAudioFiles(dir)
+				);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.ToString());
+			}
 		}
 
 		public void SearchAudioFiles()

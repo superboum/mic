@@ -76,8 +76,10 @@ namespace MicCore
 		public static void handleDriveChange(object o, EventArgs e)
 		{
 			var ev = e as DriveChangeArgs;
+			Console.WriteLine("New event {0}", ev.Type.ToString());
 			if (ev.Drive != null)
 			{
+				Console.WriteLine("Detected files {0}", ev.Drive.AudioFiles.Count);
 				foreach (var file in ev.Drive.AudioFiles)
 				{
 					Console.WriteLine("{0} - {1} - {2}", file.FullName, file.Length, file.DirectoryName);
@@ -94,7 +96,7 @@ namespace MicCore
 						}
 						catch (Exception err2)
 						{
-							Console.WriteLine(err2);
+							Console.WriteLine(err2.ToString());
 						}
 					}
 					catch (UnauthorizedAccessException err) {

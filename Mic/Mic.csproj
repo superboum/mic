@@ -61,5 +61,11 @@
     <Compile Include="ImportWindow.cs" />
     <Compile Include="gtk-gui\Mic.ImportWindow.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MicCore\MicCore.csproj">
+      <Project>{1586FB80-6253-4AC6-ACE7-AA2F14E715EA}</Project>
+      <Name>MicCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
