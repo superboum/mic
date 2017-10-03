@@ -9,27 +9,42 @@ public partial class MainWindow : Gtk.Window
 		createNodeView();
 	}
 
-	protected void editStudent(object o, Gtk.EditedArgs args)
+	protected void EditStudent(object o, Gtk.EditedArgs args)
 	{
 		
 	}
 
-	protected void createNodeView()
+	protected void RenderStudent(Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter) 
+	{
+		String toto = (String) model.GetValue(iter, 0);
+		(cell as Gtk.CellRendererText).Text = toto;
+	}
+
+	protected void addColumn(String name, TreeCellDataFunc tcdf, EditedHandler eh)
 	{
 		var renderer = new Gtk.CellRendererText();
-		renderer.Editable = true;
-		renderer.Edited += editStudent;
+		if (eh != null)
+		{
+			renderer.Editable = true;
+			renderer.Edited += eh;
+		}
 
-		treeviewImported.AppendColumn("Elève", renderer, "text", 0);
+		var column = new Gtk.TreeViewColumn();
+		column.Title = name;
+		column.PackStart(renderer, true);
+		column.Resizable = true;
+		column.SetCellDataFunc(renderer, new Gtk.TreeCellDataFunc(tcdf));
+
+		treeviewImported.AppendColumn(column);
+	}
+
+	protected void createNodeView()
+	{
+		addColumn("Elèves", RenderStudent, EditStudent);
 		treeviewImported.AppendColumn("Fichier original", new Gtk.CellRendererText(), "text", 1);
 		treeviewImported.AppendColumn("Durée", new Gtk.CellRendererText(), "text", 2);
 		treeviewImported.AppendColumn("Taille", new Gtk.CellRendererText(), "text", 3);
 
-		foreach (var col in treeviewImported.Columns)
-		{
-			col.Expand = true;
-			col.Resizable = true;
-		}
 
 		Gtk.TreeStore store = new Gtk.TreeStore(typeof(string), typeof(string), typeof(string), typeof(string));
 		Gtk.TreeIter iter = store.AppendValues("Exercice 1");
