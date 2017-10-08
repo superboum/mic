@@ -82,17 +82,17 @@ namespace MicCore
 				Console.WriteLine("Detected files {0}", ev.Drive.AudioFiles.Count);
 				foreach (var file in ev.Drive.AudioFiles)
 				{
-					Console.WriteLine("{0} - {1} - {2}", file.FullName, file.Length, file.DirectoryName);
+					Console.WriteLine("{0} - {1} - {2}", file.File.FullName, file.File.Length, file.File.DirectoryName);
 					try
 					{
-						System.IO.File.Move(@file.FullName, @"C:\Users\Azrael\Documents\Downloads\" + file.Name);
+						System.IO.File.Move(@file.File.FullName, @"C:\Users\Azrael\Documents\Downloads\" + file.File.Name);
 					}
 					catch (System.IO.IOException err)
 					{
 						Console.WriteLine("Fichier corrompu {0}", err.ToString());
 						try
 						{
-							System.IO.File.Delete(@file.FullName);
+							System.IO.File.Delete(@file.File.FullName);
 						}
 						catch (Exception err2)
 						{

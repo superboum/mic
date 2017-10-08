@@ -10,7 +10,7 @@ namespace MicCore
 		public string Drive { get; }
 		public string TotalFreeSpace { get; private set; }
 		public string VolumeLabel { get; private set;}
-		public IList<FileInfo> AudioFiles { get; private set; }
+		public IList<AudioFile> AudioFiles { get; private set; }
 
 		protected DriveInfo driveInfo;
 
@@ -18,7 +18,7 @@ namespace MicCore
 		{
 			Drive = drive;
 			driveInfo = new DriveInfo(@drive);
-			AudioFiles = new List<FileInfo>();
+			AudioFiles = new List<AudioFile>();
 			Update();
 			SearchAudioFiles();
 		}
@@ -35,7 +35,7 @@ namespace MicCore
 			{
 				extensions.ToList().ForEach(
 					(ext) => di.GetFiles(ext).ToList().ForEach(
-						(file) => AudioFiles.Add(file)
+						(file) => AudioFiles.Add(new AudioFile(file))
 					)
 				);
 
@@ -45,7 +45,7 @@ namespace MicCore
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.ToString());
+				Console.WriteLine(e);
 			}
 		}
 

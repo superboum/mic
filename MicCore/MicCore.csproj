@@ -29,6 +29,7 @@
     <Compile Include="MonitorUSBDrives.cs" />
     <Compile Include="USBDrive.cs" />
     <Compile Include="Importer.cs" />
+    <Compile Include="AudioFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Management" />

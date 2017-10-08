@@ -1,20 +1,9 @@
-﻿using System;
-using Gtk;
-using MicCore;
+﻿using Gtk;
 
 namespace Mic
 {
 	class MainClass
 	{
-		static void HandleDriveChange(object sender, EventArgs e)
-		{
-			Gtk.Application.Invoke(delegate
-			{
-				ImportWindow iw = new ImportWindow();
-				iw.Show();
-			});
-		}
-
 		public static void Main(string[] args)
 		{
 			Application.Init();
@@ -22,8 +11,7 @@ namespace Mic
 			MainWindow win = new MainWindow();
 			win.Show();
 
-			var monitor = new MonitorUSBDrives();
-			monitor.DriveChange += HandleDriveChange;
+			var miw = new ManageImportWindow();
 
 			Application.Run();
 		}

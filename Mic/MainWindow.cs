@@ -1,35 +1,35 @@
 ﻿using System;
 using Gtk;
 
-public partial class MainWindow : Gtk.Window
+public partial class MainWindow : Window
 {
-	public MainWindow() : base(Gtk.WindowType.Toplevel)
+	public MainWindow() : base(WindowType.Toplevel)
 	{
 		Build();
 		createNodeView();
 	}
 
-	protected void EditStudent(object o, Gtk.EditedArgs args)
+	protected void EditStudent(object o, EditedArgs args)
 	{
 		
 	}
 
-	protected void RenderStudent(Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter) 
+	protected void RenderStudent(TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter) 
 	{
-		String toto = (String) model.GetValue(iter, 0);
-		(cell as Gtk.CellRendererText).Text = toto;
+		string toto = (string) model.GetValue(iter, 0);
+		(cell as CellRendererText).Text = toto;
 	}
 
-	protected void addColumn(String name, TreeCellDataFunc tcdf, EditedHandler eh)
+	protected void addColumn(string name, TreeCellDataFunc tcdf, EditedHandler eh)
 	{
-		var renderer = new Gtk.CellRendererText();
+		CellRendererText renderer = new CellRendererText();
 		if (eh != null)
 		{
 			renderer.Editable = true;
 			renderer.Edited += eh;
 		}
 
-		var column = new Gtk.TreeViewColumn();
+		var column = new TreeViewColumn();
 		column.Title = name;
 		column.PackStart(renderer, true);
 		column.Resizable = true;
