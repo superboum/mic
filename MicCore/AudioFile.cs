@@ -7,7 +7,7 @@ namespace MicCore
 	{
 
 		public FileInfo File { get; private set; }
-		public Boolean Selected { get; private set; }
+		public bool Selected { get; set; }
 
 		public AudioFile(FileInfo file)
 		{

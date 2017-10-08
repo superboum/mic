@@ -62,6 +62,7 @@ namespace Mic
 			w3.Fill = false;
 			// Container child hbox2.Gtk.Box+BoxChild
 			this.buttonImport = new global::Gtk.Button();
+			this.buttonImport.Sensitive = false;
 			this.buttonImport.CanFocus = true;
 			this.buttonImport.Name = "buttonImport";
 			this.buttonImport.UseUnderline = true;
