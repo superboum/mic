@@ -10,13 +10,34 @@ namespace Mic
 
 		public USBDrive Drive { get; private set; }
 		TreeStore store;
+		const string COMBO_STUDENT = "Nom de l'élève";
+		const string COMBO_EXERCICE = "Nom de l'exercice";
 
 		public ImportWindow(USBDrive drive) : base(WindowType.Toplevel)
 		{
 			Drive = drive;
  			store = new TreeStore(typeof(AudioFile));
+
 			Build();
-			createNodeView();
+			CreateNodeView();
+			CreateCompletionEntry();
+		}
+
+		protected void CreateCompletionEntry()
+		{
+			ListStore studentsStore = new ListStore(typeof(string));
+			Program.Com.Students.ToList().ForEach((Student s) => studentsStore.AppendValues(s.Name));
+
+			entryStudent.Completion = new EntryCompletion();
+			entryStudent.Completion.Model = studentsStore;
+			entryStudent.Completion.TextColumn = 0;
+
+			ListStore exercicesStore = new ListStore(typeof(string));
+			Program.Com.Exercices.ToList().ForEach((Exercice e) => exercicesStore.AppendValues(e.Name));
+
+			entryExercice.Completion = new EntryCompletion();
+			entryExercice.Completion.Model = exercicesStore;
+			entryExercice.Completion.TextColumn = 0;
 		}
 
 		protected void RenderSelection(TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
@@ -39,7 +60,7 @@ namespace Mic
 
 		protected void ToggleSelection(object sender, ToggledArgs args)
 		{
-			Console.WriteLine("Toggle");
+			//Console.WriteLine("Toggle");
 			TreeIter iter;
 			if (store.GetIterFromString(out iter, args.Path))
 			{
@@ -54,6 +75,7 @@ namespace Mic
 			if (th != null)
 			{
 				renderer.Toggled += th;
+				renderer.Toggled += CheckImport; // @TODO might need a refactor
 			}
 			AddColumn(name, renderer, tcdf);
 		}
@@ -79,7 +101,7 @@ namespace Mic
 			importView.AppendColumn(column);
 		}
 
-		protected void createNodeView()
+		protected void CreateNodeView()
 		{
 			AddToggleColumn("Sel.", RenderSelection, ToggleSelection);
 			AddTextColumn("Fichier", RenderFile, null);
@@ -89,6 +111,48 @@ namespace Mic
 
 			Drive.AudioFiles.ToList().ForEach((obj) => store.AppendValues(obj));
 			importView.Model = store;
+		}
+
+		protected void FocusInStudent(object o, FocusInEventArgs args)
+		{
+			var entry = o as Entry;
+			if (entry.Text == COMBO_STUDENT)
+				entry.Text = "";
+		}
+
+		protected void FocusOutStudent(object o, FocusOutEventArgs args)
+		{
+			var entry = o as Entry;
+			if (entry.Text == "")
+				entry.Text = COMBO_STUDENT;
+		}
+
+		protected void FocusInExercice(object o, FocusInEventArgs args)
+		{
+			var entry = o as Entry;
+			if (entry.Text == COMBO_EXERCICE)
+				entry.Text = "";
+		}
+
+		protected void FocusOutExercice(object o, FocusOutEventArgs args)
+		{
+			var entry = o as Entry;
+			if (entry.Text == "")
+				entry.Text = COMBO_EXERCICE;
+		}
+
+		protected void CheckImport(object sender, EventArgs e)
+		{
+			bool canImport = 
+				entryStudent.Text != "" && entryStudent.Text != COMBO_STUDENT &&
+				entryExercice.Text != "" && entryExercice.Text != COMBO_EXERCICE &&
+				Drive.AudioFiles.Any((AudioFile a) => a.Selected);
+
+			buttonImport.Sensitive = canImport;
+		}
+
+		protected void DoImport(object sender, EventArgs e)
+		{
 		}
 	}
 }

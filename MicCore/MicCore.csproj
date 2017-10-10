@@ -28,12 +28,16 @@
   <ItemGroup>
     <Compile Include="MonitorUSBDrives.cs" />
     <Compile Include="USBDrive.cs" />
-    <Compile Include="Importer.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="AudioFile.cs" />
+    <Compile Include="Student.cs" />
+    <Compile Include="Exercice.cs" />
+    <Compile Include="PersistedData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Management" />
     <Reference Include="System" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

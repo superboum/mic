@@ -16,9 +16,9 @@ namespace Mic
 
 		private global::Gtk.Button buttonImport;
 
-		private global::Gtk.ComboBoxEntry comboChooseStudent;
+		private global::Gtk.Entry entryStudent;
 
-		private global::Gtk.ComboBoxEntry comboChooseExercice;
+		private global::Gtk.Entry entryExercice;
 
 		protected virtual void Build()
 		{
@@ -74,28 +74,27 @@ namespace Mic
 			w4.Expand = false;
 			w4.Fill = false;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.comboChooseStudent = global::Gtk.ComboBoxEntry.NewText();
-			this.comboChooseStudent.AppendText(global::Mono.Unix.Catalog.GetString("Nom de l\'élève"));
-			this.comboChooseStudent.CanDefault = true;
-			this.comboChooseStudent.Name = "comboChooseStudent";
-			this.comboChooseStudent.Active = 0;
-			this.hbox2.Add(this.comboChooseStudent);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.comboChooseStudent]));
+			this.entryStudent = new global::Gtk.Entry();
+			this.entryStudent.CanFocus = true;
+			this.entryStudent.Name = "entryStudent";
+			this.entryStudent.Text = global::Mono.Unix.Catalog.GetString("Nom de l\'élève");
+			this.entryStudent.IsEditable = true;
+			this.entryStudent.InvisibleChar = '●';
+			this.hbox2.Add(this.entryStudent);
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.entryStudent]));
 			w5.PackType = ((global::Gtk.PackType)(1));
 			w5.Position = 2;
-			w5.Expand = false;
-			w5.Fill = false;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.comboChooseExercice = global::Gtk.ComboBoxEntry.NewText();
-			this.comboChooseExercice.AppendText(global::Mono.Unix.Catalog.GetString("Nom de l\'exercice"));
-			this.comboChooseExercice.Name = "comboChooseExercice";
-			this.comboChooseExercice.Active = 0;
-			this.hbox2.Add(this.comboChooseExercice);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.comboChooseExercice]));
+			this.entryExercice = new global::Gtk.Entry();
+			this.entryExercice.CanFocus = true;
+			this.entryExercice.Name = "entryExercice";
+			this.entryExercice.Text = global::Mono.Unix.Catalog.GetString("Nom de l\'exercice");
+			this.entryExercice.IsEditable = true;
+			this.entryExercice.InvisibleChar = '●';
+			this.hbox2.Add(this.entryExercice);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.entryExercice]));
 			w6.PackType = ((global::Gtk.PackType)(1));
 			w6.Position = 3;
-			w6.Expand = false;
-			w6.Fill = false;
 			this.vbox4.Add(this.hbox2);
 			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox4[this.hbox2]));
 			w7.Position = 1;
@@ -108,8 +107,13 @@ namespace Mic
 			}
 			this.DefaultWidth = 571;
 			this.DefaultHeight = 328;
-			this.comboChooseStudent.HasDefault = true;
 			this.Show();
+			this.entryExercice.FocusInEvent += new global::Gtk.FocusInEventHandler(this.FocusInExercice);
+			this.entryExercice.FocusOutEvent += new global::Gtk.FocusOutEventHandler(this.FocusOutExercice);
+			this.entryExercice.Changed += new global::System.EventHandler(this.CheckImport);
+			this.entryStudent.FocusInEvent += new global::Gtk.FocusInEventHandler(this.FocusInStudent);
+			this.entryStudent.FocusOutEvent += new global::Gtk.FocusOutEventHandler(this.FocusOutStudent);
+			this.entryStudent.Changed += new global::System.EventHandler(this.CheckImport);
 		}
 	}
 }
