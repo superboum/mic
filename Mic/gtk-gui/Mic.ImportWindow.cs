@@ -114,6 +114,7 @@ namespace Mic
 			this.entryStudent.FocusInEvent += new global::Gtk.FocusInEventHandler(this.FocusInStudent);
 			this.entryStudent.FocusOutEvent += new global::Gtk.FocusOutEventHandler(this.FocusOutStudent);
 			this.entryStudent.Changed += new global::System.EventHandler(this.CheckImport);
+			this.buttonImport.Clicked += new global::System.EventHandler(this.DoImport);
 		}
 	}
 }

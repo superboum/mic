@@ -8,11 +8,26 @@ namespace MicCore
 
 		public FileInfo File { get; private set; }
 		public bool Selected { get; set; }
+		public string ImportedName { get; private set; }
 
 		public AudioFile(FileInfo file)
 		{
 			File = file;
 			Selected = false;
+		}
+
+		public AudioFile SetImportedName(Student s, Exercice e)
+		{
+			ImportedName = 
+				 s.Name
+				 + "."
+				 + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")
+				 + "."
+				 + File.Name;
+
+			ImportedName = Path.Combine(e.Name, ImportedName);
+
+			return this;
 		}
 
 		public string HumanReadableSize()

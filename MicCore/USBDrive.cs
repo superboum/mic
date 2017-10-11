@@ -18,14 +18,24 @@ namespace MicCore
 		{
 			Drive = drive;
 			driveInfo = new DriveInfo(@drive);
-			AudioFiles = new List<AudioFile>();
+			Refresh();
+		}
+
+		public void Refresh()
+		{
 			Update();
 			SearchAudioFiles();
 		}
 
-		public void Update() {
+		protected void Update() {
 			TotalFreeSpace = driveInfo.TotalFreeSpace.ToString();
 			VolumeLabel = driveInfo.VolumeLabel;
+		}
+
+		protected void SearchAudioFiles()
+		{
+			AudioFiles = new List<AudioFile>();
+			PopulateAudioFiles(driveInfo.RootDirectory);
 		}
 
 		protected void PopulateAudioFiles(DirectoryInfo di)
@@ -47,11 +57,6 @@ namespace MicCore
 			{
 				Console.WriteLine(e);
 			}
-		}
-
-		public void SearchAudioFiles()
-		{
-			PopulateAudioFiles(driveInfo.RootDirectory);
 		}
 	}
 }

@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{1586FB80-6253-4AC6-ACE7-AA2F14E715EA}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>MicCore</RootNamespace>
     <AssemblyName>MicCore</AssemblyName>
   </PropertyGroup>

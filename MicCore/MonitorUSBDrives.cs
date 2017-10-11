@@ -110,11 +110,11 @@ namespace MicCore
 			}
 		}
 
-		static void Main(string[] args)
+		/*static void Main(string[] args)
 		{
 			var monitor = new MonitorUSBDrives();
 			monitor.DriveChange += handleDriveChange;
 			Console.ReadKey();
-		}
+		}*/
 	}
 }

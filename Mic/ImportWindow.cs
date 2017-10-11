@@ -101,6 +101,12 @@ namespace Mic
 			importView.AppendColumn(column);
 		}
 
+		protected void PopulateStore()
+		{
+			store.Clear();
+			Drive.AudioFiles.ToList().ForEach((obj) => store.AppendValues(obj));
+		}
+
 		protected void CreateNodeView()
 		{
 			AddToggleColumn("Sel.", RenderSelection, ToggleSelection);
@@ -108,9 +114,8 @@ namespace Mic
 			AddTextColumn("Taille", RenderSize, null);
 			// @TODO Add column length and/or preview
 			importView.GetColumn(1).Expand = true;
-
-			Drive.AudioFiles.ToList().ForEach((obj) => store.AppendValues(obj));
 			importView.Model = store;
+			PopulateStore();
 		}
 
 		protected void FocusInStudent(object o, FocusInEventArgs args)
@@ -153,6 +158,8 @@ namespace Mic
 
 		protected void DoImport(object sender, EventArgs e)
 		{
+			Program.Com.Import(entryStudent.Text, entryExercice.Text, Drive);
+			PopulateStore();
 		}
 	}
 }
