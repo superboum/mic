@@ -9,6 +9,7 @@ namespace MicCore
 	{
 		public IList<Student> Students { get { return persisted.Students; } }
 		public IList<Exercice> Exercices { get { return persisted.Exercices; } }
+		public IDictionary<Exercice, IList<AudioFile>> AlreadyImported { get; private set; }  
 
 		DirectoryInfo import;
 		PersistedData persisted;
@@ -17,7 +18,34 @@ namespace MicCore
 		{
 			persisted = PersistedData.ReadXML("info.xml");
 			import = new DirectoryInfo("import");
+			AlreadyImported = new Dictionary<Exercice, IList<AudioFile>>();
 			if (!import.Exists) import.Create();
+			ScanImported();
+		}
+
+		public void ScanImported()
+		{
+			AlreadyImported.Clear();
+
+			import
+				.EnumerateDirectories()
+				.ToList()
+				.ForEach(
+					(di) => AlreadyImported[persisted.getOrAddExercice(di.Name)] = new List<AudioFile>()
+				);
+
+			AlreadyImported
+				.Keys
+				.ToList()
+				.ForEach((Exercice e) =>
+					USBDrive.Extensions
+				         .ToList()
+				         .ForEach((ext) =>
+							new DirectoryInfo(Path.Combine(import.FullName, e.Name))
+							.GetFiles(ext)
+							.Select((FileInfo arg) => new AudioFile(arg))
+							.ToList()
+							.ForEach((AudioFile a) => AlreadyImported[e].Add(a))));
 		}
 
 		public void Import(string student, string ex, USBDrive drive)

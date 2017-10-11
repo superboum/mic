@@ -7,6 +7,7 @@ namespace MicCore
 {
 	public class USBDrive
 	{
+        public static string[] Extensions = { "*.mp3", "*.wav" }; // Is not case sensitive
 		public string Drive { get; }
 		public string TotalFreeSpace { get; private set; }
 		public string VolumeLabel { get; private set;}
@@ -40,10 +41,9 @@ namespace MicCore
 
 		protected void PopulateAudioFiles(DirectoryInfo di)
 		{
-			string[] extensions = { "*.mp3", "*.wav"}; // Is not case sensitive
 			try
 			{
-				extensions.ToList().ForEach(
+				USBDrive.Extensions.ToList().ForEach(
 					(ext) => di.GetFiles(ext).ToList().ForEach(
 						(file) => AudioFiles.Add(new AudioFile(file))
 					)
