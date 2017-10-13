@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Globalization;
 
 namespace MicCore
 {
@@ -9,11 +10,31 @@ namespace MicCore
 		public FileInfo File { get; private set; }
 		public bool Selected { get; set; }
 		public string ImportedName { get; private set; }
+		public Student AssociatedStudent { get; private set; }
+		public DateTime AssociatedDatetime { get; private set; }
+		public string OriginalFileName { get; private set; }
+
+		CultureInfo provider;
+		string dateFormat;
 
 		public AudioFile(FileInfo file)
 		{
 			File = file;
 			Selected = false;
+			provider = CultureInfo.InvariantCulture;
+			dateFormat = "yyyy-MM-dd_HH-mm-ss";
+			Parse();
+		}
+
+		protected void Parse()
+		{
+			if (File == null) return;
+			string[] fileName = File.Name.Split('.');
+			if (fileName.Length < 4) return;
+
+			AssociatedStudent = Command.Instance.GetStudent(fileName[0]);
+			AssociatedDatetime = DateTime.ParseExact(fileName[1], dateFormat, provider);
+			OriginalFileName = fileName[2] + "." + fileName[3];
 		}
 
 		public AudioFile SetImportedName(Student s, Exercice e)
@@ -21,7 +42,7 @@ namespace MicCore
 			ImportedName = 
 				 s.Name
 				 + "."
-				 + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")
+				 + DateTime.Now.ToString(dateFormat)
 				 + "."
 				 + File.Name;
 

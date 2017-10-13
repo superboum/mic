@@ -52,7 +52,7 @@ namespace MicCore
 				var file = new StreamReader(path);
 				var data = reader.Deserialize(file) as PersistedData;
 				file.Close();
-				return data == null ? new PersistedData() : data;
+				return data ?? new PersistedData();
 			}
 			return new PersistedData();
 		}

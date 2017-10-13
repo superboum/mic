@@ -26,14 +26,14 @@ namespace Mic
 		protected void CreateCompletionEntry()
 		{
 			ListStore studentsStore = new ListStore(typeof(string));
-			Program.Com.Students.ToList().ForEach((Student s) => studentsStore.AppendValues(s.Name));
+			Command.Instance.Students.ToList().ForEach((Student s) => studentsStore.AppendValues(s.Name));
 
 			entryStudent.Completion = new EntryCompletion();
 			entryStudent.Completion.Model = studentsStore;
 			entryStudent.Completion.TextColumn = 0;
 
 			ListStore exercicesStore = new ListStore(typeof(string));
-			Program.Com.Exercices.ToList().ForEach((Exercice e) => exercicesStore.AppendValues(e.Name));
+			Command.Instance.Exercices.ToList().ForEach((Exercice e) => exercicesStore.AppendValues(e.Name));
 
 			entryExercice.Completion = new EntryCompletion();
 			entryExercice.Completion.Model = exercicesStore;
@@ -158,7 +158,7 @@ namespace Mic
 
 		protected void DoImport(object sender, EventArgs e)
 		{
-			Program.Com.Import(entryStudent.Text, entryExercice.Text, Drive);
+			Command.Instance.Import(entryStudent.Text, entryExercice.Text, Drive);
 			PopulateStore();
 		}
 	}

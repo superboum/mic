@@ -11,16 +11,30 @@ namespace MicCore
 		public IList<Exercice> Exercices { get { return persisted.Exercices; } }
 		public IDictionary<Exercice, IList<AudioFile>> AlreadyImported { get; private set; }  
 
-		DirectoryInfo import;
 		PersistedData persisted;
+		DirectoryInfo import;
 
-		public Command()
+		static Command instance;
+		public static Command Instance { get { 
+				if (instance == null) {
+					instance = new Command();
+					instance.Init();
+				}
+				return instance; 
+			} 
+		}
+
+		private Command()
 		{
-			persisted = PersistedData.ReadXML("info.xml");
 			import = new DirectoryInfo("import");
 			AlreadyImported = new Dictionary<Exercice, IList<AudioFile>>();
+		}
+
+		private void Init()
+		{
+			persisted = PersistedData.ReadXML("info.xml");
 			if (!import.Exists) import.Create();
-			ScanImported();
+            ScanImported();
 		}
 
 		public void ScanImported()
@@ -77,6 +91,16 @@ namespace MicCore
 		public void SavePersistedData()
 		{
 			PersistedData.WriteXML("info.xml", persisted);
+		}
+
+		public Student GetStudent(string name)
+		{
+			return persisted.getOrAddStudent(name);
+		}
+
+		public Exercice GetExercice(string name)
+		{
+			return persisted.getOrAddExercice(name);
 		}
 	}
 }

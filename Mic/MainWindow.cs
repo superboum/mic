@@ -23,7 +23,7 @@ namespace Mic
 			var a = model.GetValue(iter, 0) as AudioFile;
 			if (a != null)
 			{
-				(cell as CellRendererText).Text = a.File.Name;
+				(cell as CellRendererText).Text = a.AssociatedStudent.Name;
 			}
 			else 
 			{
@@ -31,6 +31,45 @@ namespace Mic
 				(cell as CellRendererText).Text = e.Name;
 			}
 
+		}
+
+		protected void RenderFilename(TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
+		{
+			var a = model.GetValue(iter, 0) as AudioFile;
+			if (a != null)
+			{
+				(cell as CellRendererText).Text = a.OriginalFileName;
+			}
+			else
+			{
+				(cell as CellRendererText).Text = "";
+
+			}
+		}
+
+		protected void RenderDate(TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
+		{
+			var a = model.GetValue(iter, 0) as AudioFile;
+			if (a != null)
+			{
+				(cell as CellRendererText).Text = a.AssociatedDatetime.ToString();
+			}
+			else
+			{
+				(cell as CellRendererText).Text = "";
+			}
+		}
+
+		protected void RenderSize(TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
+		{
+			var a = model.GetValue(iter, 0) as AudioFile;
+			if (a != null)
+			{
+				(cell as CellRendererText).Text = a.HumanReadableSize();
+			}
+			else {
+				(cell as CellRendererText).Text = "";
+			}
 		}
 
 		protected void AddTextColumn(string name, TreeCellDataFunc tcdf, EditedHandler eh)
@@ -58,6 +97,11 @@ namespace Mic
 		protected void createNodeView()
 		{
 			AddTextColumn("Elèves", RenderStudent, EditStudent);
+            AddTextColumn("Nom original", RenderFilename, null);
+            AddTextColumn("Date", RenderDate, null);
+            AddTextColumn("Taille", RenderSize, null);
+			treeviewImported.GetColumn(0).Expand = true;
+			treeviewImported.GetColumn(1).Expand = true;
 			/*treeviewImported.AppendColumn("Fichier original", new Gtk.CellRendererText(), "text", 1);
 			treeviewImported.AppendColumn("Durée", new Gtk.CellRendererText(), "text", 2);
 			treeviewImported.AppendColumn("Taille", new Gtk.CellRendererText(), "text", 3);*/
@@ -65,9 +109,9 @@ namespace Mic
 
 			TreeStore store = new Gtk.TreeStore(typeof(AudioFile), typeof(Exercice));
 			TreeIter iter;
-			Program.Com.AlreadyImported.Keys.ToList().ForEach(delegate (MicCore.Exercice e) {
+			Command.Instance.AlreadyImported.Keys.ToList().ForEach(delegate (MicCore.Exercice e) {
 				iter = store.AppendValues(null, e);
-				Program.Com.AlreadyImported[e]
+				Command.Instance.AlreadyImported[e]
 					   .ToList()
 					   .ForEach((a) => store.AppendValues(iter, a, null));
 			});
