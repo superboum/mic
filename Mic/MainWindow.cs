@@ -7,10 +7,14 @@ namespace Mic
 {
 	public partial class MainWindow : Window
 	{
+
+		TreeStore store;
+
 		public MainWindow() : base(WindowType.Toplevel)
 		{
 			Build();
 			createNodeView();
+			Refresh();
 		}
 
 		protected void EditStudent(object o, EditedArgs args)
@@ -107,16 +111,20 @@ namespace Mic
 			treeviewImported.AppendColumn("Taille", new Gtk.CellRendererText(), "text", 3);*/
 
 
-			TreeStore store = new Gtk.TreeStore(typeof(AudioFile), typeof(Exercice));
+			store = new Gtk.TreeStore(typeof(AudioFile), typeof(Exercice));
+			treeviewImported.Model = store;
+		}
+
+		public void Refresh()
+		{
+			store.Clear();
 			TreeIter iter;
 			Command.Instance.AlreadyImported.Keys.ToList().ForEach(delegate (MicCore.Exercice e) {
-				iter = store.AppendValues(null, e);
-				Command.Instance.AlreadyImported[e]
-					   .ToList()
-					   .ForEach((a) => store.AppendValues(iter, a, null));
+			iter = store.AppendValues(null, e);
+			Command.Instance.AlreadyImported[e]
+				   .ToList()
+				   .ForEach((a) => store.AppendValues(iter, a, null));
 			});
-
-			treeviewImported.Model = store;
 		}
 
 		protected void OnDeleteEvent(object sender, DeleteEventArgs a)

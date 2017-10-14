@@ -160,6 +160,7 @@ namespace Mic
 		{
 			Command.Instance.Import(entryStudent.Text, entryExercice.Text, Drive);
 			PopulateStore();
+			Program.MainWin.Refresh();
 		}
 	}
 }
