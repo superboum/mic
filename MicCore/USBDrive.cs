@@ -19,6 +19,7 @@ namespace MicCore
 		{
 			Drive = drive;
 			driveInfo = new DriveInfo(@drive);
+			AudioFiles = new List<AudioFile>();
 			Refresh();
 		}
 
@@ -35,7 +36,7 @@ namespace MicCore
 
 		protected void SearchAudioFiles()
 		{
-			AudioFiles = new List<AudioFile>();
+			AudioFiles.Clear();
 			PopulateAudioFiles(driveInfo.RootDirectory);
 		}
 

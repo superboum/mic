@@ -75,6 +75,7 @@ namespace MicCore
 				.ForEach((AudioFile a) => ImportFile(a));
 
 			drive.Refresh();
+			ScanImported();
 		}
 
 		protected void ImportFile(AudioFile a)
