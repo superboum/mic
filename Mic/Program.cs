@@ -13,6 +13,7 @@ namespace Mic
 		{
 			Application.Init();
 			Gtk.Settings.Default.SetLongProperty ("gtk-button-images", 1, "");
+			Gtk.Settings.Default.ThemeName = "MS-Windows";
 			MainWin = new MainWindow();
 			MainWin.Show();
 			var miw = new ManageImportWindow();
